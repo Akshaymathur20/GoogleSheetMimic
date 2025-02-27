@@ -1,23 +1,22 @@
 import React, { useContext } from "react";
 import { SpreadsheetContext } from "../context/SpreadsheetContext";
-import { validateCell } from "../utils/DataValidation";
 
 const Cell = ({ row, col }) => {
-  const { grid, updateCell } = useContext(SpreadsheetContext);
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    if (!validateCell(value, "number")) return;
-    updateCell(row, col, value);
-  };
+  const { grid, updateCell, setSelectedCell } = useContext(SpreadsheetContext);
 
   return (
-    <td className="border border-gray-300 w-20 h-10 text-center">
+    <td 
+      className="border border-gray-300 w-32 h-12 text-center cursor-pointer" 
+      onClick={() => {
+        console.log(`Cell Selected: Row ${row}, Col ${col}`);
+        setSelectedCell({ row, col });
+      }}
+    >
       <input
         type="text"
-        className="w-full h-full text-center border-none outline-none bg-transparent"
+        className="w-full h-full text-center border-none outline-none bg-transparent focus:bg-gray-200"
         value={grid[row][col]}
-        onChange={handleChange}
+        onChange={(e) => updateCell(row, col, e.target.value)}
       />
     </td>
   );

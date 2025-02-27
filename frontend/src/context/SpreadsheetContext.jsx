@@ -8,6 +8,8 @@ const SpreadsheetProvider = ({ children }) => {
     return savedGrid ? JSON.parse(savedGrid) : Array.from({ length: 10 }, () => Array(10).fill(""));
   });
 
+  const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
+
   useEffect(() => {
     localStorage.setItem("spreadsheet-data", JSON.stringify(grid));
   }, [grid]);
@@ -19,7 +21,7 @@ const SpreadsheetProvider = ({ children }) => {
   };
 
   return (
-    <SpreadsheetContext.Provider value={{ grid, setGrid, updateCell }}>
+    <SpreadsheetContext.Provider value={{ grid, setGrid, updateCell, selectedCell, setSelectedCell }}>
       {children}
     </SpreadsheetContext.Provider>
   );
