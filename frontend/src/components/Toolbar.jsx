@@ -3,16 +3,18 @@ import { FaBold, FaItalic, FaUnderline } from "react-icons/fa";
 
 const Toolbar = () => {
   return (
-    <div className="flex space-x-2 bg-gray-200 p-3 rounded-md shadow-md mb-2">
-      <button className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center">
-        <FaBold className="mr-1" /> B
-      </button>
-      <button className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center">
-        <FaItalic className="mr-1" /> I
-      </button>
-      <button className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center">
-        <FaUnderline className="mr-1" /> U
-      </button>
+    <div className="w-full bg-gray-200 shadow-md py-3 flex justify-center">
+      <div className="flex flex-wrap justify-center space-x-4 bg-gradient-to-r from-blue-500 to-blue-700 p-2 rounded-lg shadow-md">
+        <button className="px-4 py-2 text-white rounded-lg flex items-center hover:bg-blue-800 transition-all">
+          <FaBold className="mr-2" /> <span className="hidden sm:inline">Bold</span>
+        </button>
+        <button className="px-4 py-2 text-white rounded-lg flex items-center hover:bg-blue-800 transition-all">
+          <FaItalic className="mr-2" /> <span className="hidden sm:inline">Italic</span>
+        </button>
+        <button className="px-4 py-2 text-white rounded-lg flex items-center hover:bg-blue-800 transition-all">
+          <FaUnderline className="mr-2" /> <span className="hidden sm:inline">Underline</span>
+        </button>
+      </div>
     </div>
   );
 };

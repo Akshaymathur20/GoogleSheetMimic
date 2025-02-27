@@ -2,7 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 
-// ✅ Register the required scales & elements
+// ✅ Register the required chart elements
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ChartComponent = ({ data }) => {
@@ -22,7 +22,7 @@ const ChartComponent = ({ data }) => {
   };
 
   return (
-    <div className="w-full max-w-lg bg-white shadow-lg p-4 rounded-lg mt-6">
+    <div className="w-full max-w-4xl bg-white shadow-lg p-4 rounded-lg mt-6 mx-auto">
       <Bar data={chartData} />
     </div>
   );
