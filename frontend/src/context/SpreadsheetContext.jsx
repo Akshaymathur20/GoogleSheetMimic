@@ -85,6 +85,10 @@ const SpreadsheetProvider = ({ children }) => {
     setColumnWidths((prevWidths) => prevWidths.map((width, i) => (i === colIndex ? newWidth : width)));
   };
 
+  const clearAllCells = () => {
+    setGrid((prevGrid) => prevGrid.map((row) => row.map(() => ""))); // Reset all cells to empty
+  };
+
   // ✅ Start dragging a cell
   const startDrag = (row, col) => {
     setDraggedCell({ row, col, value: grid[row][col] });
@@ -134,7 +138,7 @@ const SpreadsheetProvider = ({ children }) => {
       cellStyles, toggleCellStyle, 
       addRow, addColumn, deleteRow, deleteColumn, 
       columnWidths, resizeColumn, 
-      startDrag, dropCell 
+      startDrag, dropCell,clearAllCells
     }}>
       {children}
     </SpreadsheetContext.Provider>

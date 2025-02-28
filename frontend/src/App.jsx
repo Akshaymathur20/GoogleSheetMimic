@@ -10,14 +10,16 @@ const App = () => {
 
   // ✅ Compute SUM, AVERAGE, MAX, MIN, COUNT for each row
   const chartData = grid.reduce((acc, row, index) => {
-    const rowValues = row.map((val) => parseFloat(val) || 0);
+    const rowValues = row.map((val) => parseFloat(val)).filter((num) => !isNaN(num)); // ✅ Exclude NaN values
+
     acc[`Row ${index + 1}`] = {
       SUM: rowValues.reduce((sum, val) => sum + val, 0),
       AVERAGE: rowValues.length > 0 ? rowValues.reduce((sum, val) => sum + val, 0) / rowValues.length : 0,
-      MAX: Math.max(...rowValues),
-      MIN: Math.min(...rowValues),
+      MAX: rowValues.length > 0 ? Math.max(...rowValues) : 0,
+      MIN: rowValues.length > 0 ? Math.min(...rowValues) : 0, // ✅ Ensure MIN handles empty rows
       COUNT: rowValues.length,
     };
+
     return acc;
   }, {});
 

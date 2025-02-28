@@ -3,7 +3,7 @@ import { FaBold, FaItalic, FaUnderline, FaPlus, FaMinus } from "react-icons/fa";
 import { SpreadsheetContext } from "../context/SpreadsheetContext";
  
 const Toolbar = () => {
-  const { toggleCellStyle, addRow, addColumn, deleteRow, deleteColumn, grid } = useContext(SpreadsheetContext);
+  const { toggleCellStyle, addRow, addColumn, deleteRow, deleteColumn, grid,clearAllCells } = useContext(SpreadsheetContext);
 
   return (
     <div className="w-full bg-gray-200 shadow-md py-3 flex justify-center">
@@ -75,6 +75,14 @@ const Toolbar = () => {
         >
           <FaMinus className="mr-2" /> Delete Column
         </button>
+
+      {/* ✅ Clear All Data Button */}
+      <button 
+        onClick={clearAllCells} 
+        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
+      >
+        Clear All Data
+      </button>
           {/* Font Color Picker */}
           <input 
           type="color" 
