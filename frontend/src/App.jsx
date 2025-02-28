@@ -8,24 +8,37 @@ import { SpreadsheetContext } from "./context/SpreadsheetContext";
 const App = () => {
   const { grid } = useContext(SpreadsheetContext);
 
+  // ✅ Compute SUM, AVERAGE, MAX, MIN, COUNT for each row
   const chartData = grid.reduce((acc, row, index) => {
-    acc[`Row ${index + 1}`] = row.reduce((sum, val) => sum + (parseFloat(val) || 0), 0);
+    const rowValues = row.map((val) => parseFloat(val) || 0);
+    acc[`Row ${index + 1}`] = {
+      SUM: rowValues.reduce((sum, val) => sum + val, 0),
+      AVERAGE: rowValues.length > 0 ? rowValues.reduce((sum, val) => sum + val, 0) / rowValues.length : 0,
+      MAX: Math.max(...rowValues),
+      MIN: Math.min(...rowValues),
+      COUNT: rowValues.length,
+    };
     return acc;
   }, {});
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-blue-50 to-blue-100 p-6">
-         <div className="w-full bg-blue-600 text-white text-center py-3 shadow-md">
+      {/* ✅ Header Section */}
+      <div className="w-full bg-blue-600 text-white text-center py-3 shadow-md">
         <h1 className="text-2xl font-bold">Google Sheets Clone</h1>
       </div>
+
+      {/* ✅ Spreadsheet Container */}
       <div className="w-full max-w-5xl bg-white shadow-lg rounded-lg p-4">
         <Toolbar />
         <FormulaBar />
         <Spreadsheet />
-       <div>
-        <h2 className="text-lg font-semibold text-gray-800 mb-2 text-center">Data Visualization</h2>
-        <ChartComponent data={chartData} />
-      </div>
+
+        {/* ✅ Chart Section */}
+        <div className="mt-6">
+          <h2 className="text-lg font-semibold text-gray-800 mb-2 text-center">Data Visualization</h2>
+          <ChartComponent data={chartData} />
+        </div>
       </div>
     </div>
   );
