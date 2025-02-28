@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { FaBold, FaItalic, FaUnderline, FaPlus, FaMinus } from "react-icons/fa";
 import { SpreadsheetContext } from "../context/SpreadsheetContext";
-
+ 
 const Toolbar = () => {
   const { toggleCellStyle, addRow, addColumn, deleteRow, deleteColumn, grid } = useContext(SpreadsheetContext);
 
