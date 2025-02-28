@@ -8,6 +8,9 @@ const SpreadsheetProvider = ({ children }) => {
     return savedGrid ? JSON.parse(savedGrid) : Array.from({ length: 10 }, () => Array(10).fill(""));
   });
 
+  // Store formatting (bold, italic, underline,fontSize, Color) for each cell
+  const [cellStyles, setCellStyles] = useState({});
+
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
 
   useEffect(() => {
@@ -20,8 +23,26 @@ const SpreadsheetProvider = ({ children }) => {
     setGrid(newGrid);
   };
 
+  // Toggle formatting (bold, italic, underline)
+  const toggleCellStyle = (style,value=null) => {
+    if (selectedCell.row === null || selectedCell.col === null) return;
+
+    const cellKey = `${selectedCell.row}-${selectedCell.col}`;
+    setCellStyles((prevStyles) => ({
+      ...prevStyles,
+      [cellKey]: {
+        ...prevStyles[cellKey],
+        [style]: value!=null ? value: !prevStyles[cellKey]?.[style], // Toggle true/false
+      },
+    }));
+  };
+
   return (
-    <SpreadsheetContext.Provider value={{ grid, setGrid, updateCell, selectedCell, setSelectedCell }}>
+    <SpreadsheetContext.Provider value={{ 
+      grid, setGrid, updateCell, 
+      selectedCell, setSelectedCell, 
+      cellStyles, toggleCellStyle 
+    }}>
       {children}
     </SpreadsheetContext.Provider>
   );
