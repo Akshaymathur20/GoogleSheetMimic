@@ -109,7 +109,7 @@ Dark Mode Support
 # 📜 Installation & Setup
 
 # Clone the repository
-git clone https://github.com/yourusername/react-google-sheets-clone.git
+git clone https://github.com/Akshaymathur20/GoogleSheetMimic.git
 cd react-google-sheets-clone
 
 # Install dependencies
