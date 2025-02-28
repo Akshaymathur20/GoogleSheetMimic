@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
-import { FaBold, FaItalic, FaUnderline } from "react-icons/fa";
+import { FaBold, FaItalic, FaUnderline, FaPlus, FaMinus } from "react-icons/fa";
 import { SpreadsheetContext } from "../context/SpreadsheetContext";
 
 const Toolbar = () => {
-  const { toggleCellStyle } = useContext(SpreadsheetContext);
+  const { toggleCellStyle, addRow, addColumn, deleteRow, deleteColumn, grid } = useContext(SpreadsheetContext);
 
   return (
     <div className="w-full bg-gray-200 shadow-md py-3 flex justify-center">
       <div className="flex flex-wrap justify-center space-x-4 bg-gradient-to-r from-blue-500 to-blue-700 p-2 rounded-lg shadow-md">
+        
         {/* Bold Button */}
         <button 
           onClick={() => toggleCellStyle("bold")} 
@@ -43,9 +44,39 @@ const Toolbar = () => {
           <option value="18px">18px</option>
           <option value="20px">20px</option>
         </select>
+        {/* Add Row */}
+        <button 
+          onClick={addRow} 
+          className="px-4 py-2 text-white rounded-lg flex items-center hover:bg-blue-800 transition-all"
+        >
+          <FaPlus className="mr-2" /> Add Row
+        </button>
 
-        {/* Font Color Picker (FIXED) */}
-        <input 
+        {/* Add Column */}
+        <button 
+          onClick={addColumn} 
+          className="px-4 py-2 text-white rounded-lg flex items-center hover:bg-blue-800 transition-all"
+        >
+          <FaPlus className="mr-2" /> Add Column
+        </button>
+
+        {/* Delete Row (Removes Last Row) */}
+        <button 
+          onClick={() => deleteRow(grid.length - 1)} 
+          className="px-4 py-2 text-white rounded-lg flex items-center hover:bg-blue-800 transition-all"
+        >
+          <FaMinus className="mr-2" /> Delete Row
+        </button>
+
+        {/* Delete Column (Removes Last Column) */}
+        <button 
+          onClick={() => deleteColumn(grid[0].length - 1)} 
+          className="px-4 py-2 text-white rounded-lg flex items-center hover:bg-blue-800 transition-all"
+        >
+          <FaMinus className="mr-2" /> Delete Column
+        </button>
+          {/* Font Color Picker */}
+          <input 
           type="color" 
           onChange={(e) => toggleCellStyle("color", e.target.value)} 
           className="w-10 h-10 rounded-lg border-none cursor-pointer"
